@@ -6,4 +6,5 @@ examples/classification/models/*
 !examples/classification/models/.gitkeep
 *.pyo
 *.pyc
-
+.idea/
+venv/
