@@ -41,17 +41,19 @@ def main():
     pl.ylim((0,10))
 
     # filter
-    IIR = LowPassIIR(a=0.7, y=data)
-    data_fil = IIR.filter(data)
+    # data_fil = []
+    IIR = LowPassIIR(a=0.1)
+    for i in range(0,len(data)):
+        data[i] = IIR.filter(data[i])
 
     pl.subplot(222)
-    pl.plot(t,data_fil)
+    pl.plot(t,data)
     pl.xlabel('time(s)')
     pl.title("signal after filter")
     N = len(t)
     df = fs/(N-1)
     f = [df*n for n in range(0,N)]
-    Y = np.fft.fft(data_fil)*2/N
+    Y = np.fft.fft(data)*2/N
     absY = [np.abs(x) for x in Y]
     pl.subplot(224)
     pl.plot(f,absY)
