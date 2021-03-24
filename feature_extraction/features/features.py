@@ -21,10 +21,12 @@ class Feature:
             for i in range(0,8):
                 col_data = in_data[j:(j+16),i]
                 abs_data = np.absolute(col_data)
-                IIR = LowPassIIR(a=0.7, y=abs_data)
-                abs_data = IIR.filter(abs_data)
+                # filter
+                IIR = LowPassIIR(a=0.1)
+                for n in range(0, len(abs_data)):
+                    abs_data[n] = IIR.filter(abs_data[n])
+                # calculate mean value
                 mav_data[i] = sum(abs_data)/len(abs_data)
-                # mav_data.append(mav_datai)
             mav_data = list(mav_data)
             self.mav_data_queue.append(mav_data)
         return list(self.mav_data_queue)
