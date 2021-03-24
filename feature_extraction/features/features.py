@@ -3,7 +3,10 @@
 
 import numpy as np
 from collections import deque
+from IIRFilter import LowPassIIR
 import math
+
+IIR = LowPassIIR(a=0.5)
 
 # Create a class of features
 class Feature:
@@ -19,6 +22,7 @@ class Feature:
             for i in range(0,8):
                 col_data = in_data[j:(j+16),i]
                 abs_data = np.absolute(col_data)
+                abs_data = IIR.filter(abs_data)
                 mav_data[i] = sum(abs_data)/len(abs_data)
                 # mav_data.append(mav_datai)
             mav_data = list(mav_data)
