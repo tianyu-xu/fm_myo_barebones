@@ -8,3 +8,4 @@ examples/classification/models/*
 *.pyc
 .idea/
 venv/
+feature_extraction/features/try.py
