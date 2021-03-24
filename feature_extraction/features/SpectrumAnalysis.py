@@ -41,7 +41,6 @@ def main():
     pl.ylim((0,10))
 
     # filter
-    # data_fil = []
     IIR = LowPassIIR(a=0.1)
     for i in range(0,len(data)):
         data[i] = IIR.filter(data[i])
