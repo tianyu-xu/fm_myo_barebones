@@ -4,7 +4,6 @@
 import numpy as np
 from collections import deque
 from IIRFilter import LowPassIIR
-import math
 
 
 # Create a class of features
@@ -14,21 +13,19 @@ class Feature:
         self.mav_data_queue = deque(maxlen=self.n)
 
 # MAV: Mean Absolute Value
+# Use a first order IIR filter
     def MAV(self, in_data):  # 512*8
         mav_data = {}
-        num_splitarray = np.linspace(0,496,64,dtype=int) # step = 8, num = 64
-        for j in num_splitarray:
-            for i in range(0,8):
-                col_data = in_data[j:(j+16),i]
-                abs_data = np.absolute(col_data)
-                # filter
-                IIR = LowPassIIR(a=0.1)
-                for n in range(0, len(abs_data)):
-                    abs_data[n] = IIR.filter(abs_data[n])
-                # calculate mean value
-                mav_data[i] = sum(abs_data)/len(abs_data)
-            mav_data = list(mav_data)
-            self.mav_data_queue.append(mav_data)
+        for i in range(0,8):
+            col_data = in_data[:,i]
+            abs_data = np.absolute(col_data)
+            # filter
+            IIR = LowPassIIR(a=1/25)
+            for n in range(0, len(abs_data)):
+                abs_data[n] = IIR.filter(abs_data[n])
+
+            mav_data[i] = abs_data  # 1*512
+            self.mav_data_queue.append(mav_data[i])
         return list(self.mav_data_queue)
 
 

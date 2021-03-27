@@ -9,3 +9,4 @@ examples/classification/models/*
 .idea/
 venv/
 feature_extraction/features/try.py
+feature_extraction/features/MAV_windowing.py
