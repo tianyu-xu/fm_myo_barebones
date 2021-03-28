@@ -10,12 +10,12 @@ from IIRFilter import LowPassIIR
 class Feature:
     def __init__(self, input_len):
         self.n = input_len
-        self.mav_data_queue = deque(maxlen=self.n)
+        # self.mav_data_queue = deque(maxlen=self.n)
 
 # MAV: Mean Absolute Value
 # Use a first order IIR filter
     def MAV(self, in_data):  # 512*8
-        mav_data = {}
+        mav_data = [[0] * 512 for i in range(0, 8)]
         for i in range(0,8):
             col_data = in_data[:,i]
             abs_data = np.absolute(col_data)
@@ -25,8 +25,9 @@ class Feature:
                 abs_data[n] = IIR.filter(abs_data[n])
 
             mav_data[i] = abs_data  # 1*512
-            self.mav_data_queue.append(mav_data[i])
-        return list(self.mav_data_queue)
+            # self.mav_data_queue.append(mav_data[i])
+        mav_data = np.array(mav_data)
+        return mav_data
 
 
 # ZC:

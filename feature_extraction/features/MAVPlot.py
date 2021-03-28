@@ -49,9 +49,9 @@ def main():
             if (emg_data.ndim==2):
                 if (emg_data.shape[0]==512):
                     mav_data = calculate.MAV(emg_data)
-                    mav_data = np.array(mav_data)
+                    # mav_data = np.array(mav_data)
                     # update data
-                    plotter.update_plot(np.array(mav_data.T))
+                    plotter.update_plot(mav_data)
 
 
             if keyboard.is_pressed('C'):
