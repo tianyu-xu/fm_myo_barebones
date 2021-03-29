@@ -45,12 +45,13 @@ def main():
             # Transform it to numpy matrix
             emg_data = np.array([x[1] for x in emg_data])
 
-            # avoid len() report erro
+            # avoid len() report error
             if (emg_data.ndim==2):
                 if (emg_data.shape[0]==512):
+                    # calculate MAV of emg data
                     mav_data = calculate.MAV(emg_data)
-                    # mav_data = np.array(mav_data)
-                    # update data
+                    mav_data = np.array(mav_data)
+
                     plotter.update_plot(mav_data)
 
 
