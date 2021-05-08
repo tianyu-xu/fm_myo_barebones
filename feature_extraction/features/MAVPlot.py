@@ -16,6 +16,7 @@ from myo_ecn.listeners                   import ConnectionChecker
 from myo_ecn.listeners                   import Buffer
 from MultichannelPlot                    import MultichannelPlot
 from features                            import Feature
+from cursor                              import cursor
 
 
 def main():
@@ -32,6 +33,8 @@ def main():
     calculate = Feature(input_len = 512)
     # Setup multichannel plotter for visualisation:
     plotter = MultichannelPlot(nchan = 8, xlen = 512) # Number of EMG channels in MYO armband is 8 , window size is 15 for MAV
+    freq = 200
+    move = cursor(freq)
 
 
     # Tell MYO API to start a parallel thread that will collect the data and
@@ -53,6 +56,8 @@ def main():
                     mav_data = np.array(mav_data)
 
                     plotter.update_plot(mav_data)
+
+                    move.move_cursor(mav_data)
 
 
             if keyboard.is_pressed('C'):
