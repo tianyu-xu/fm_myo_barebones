@@ -53,7 +53,7 @@ def main():
                 if (emg_data.shape[0]==512):
                     # calculate MAV of emg data
                     mav_data = calculate.MAV(emg_data)
-                    mav_data = np.array(mav_data)
+                    mav_data = np.array(mav_data.T)
 
                     plotter.update_plot(mav_data)
 

@@ -1,5 +1,7 @@
 import pyautogui
+import numpy as np
 import math
+
 
 class cursor(object):
     
@@ -8,10 +10,14 @@ class cursor(object):
         
     def move_cursor(self,input_data):        
         # inp = input_data
-        up = input_data[1,2]
-        down = input_data[5,7]
-        right = input_data[0,6]
-        left = input_data[3,4]
+        # up = input_data[2,1]
+        # down = input_data[6,1]
+        # right = input_data[1,1]
+        # left = input_data[3,1]
+        up = np.mean(input_data[5, -50:]) #5
+        down = np.mean(input_data[2, -50:]) #2
+        right = np.mean(input_data[0, -50:]) #0
+        left = np.mean(input_data[4, -50:]) #4
         pyautogui.move(up-down, right-left,duration=1/self.freq)
         #pyautogui.move(self.down, self.right, duration=0.005)
 

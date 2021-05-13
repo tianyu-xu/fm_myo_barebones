@@ -12,7 +12,7 @@ class MultichannelPlot(object):
         for (i,ax) in enumerate(self.axes):
             plt.sca(ax)
             plt.ylabel('Ch.%d' % (i+1))
-        self.set_ylim([-128, 128])
+        self.set_ylim([-0, 64])
         self.graphs = [ax.plot(np.arange(self.xlen), np.zeros(self.xlen))[0] for ax in self.axes]
     
     def set_ylim(self, lims):
