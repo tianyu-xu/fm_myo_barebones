@@ -43,23 +43,10 @@ class Application(tk.Frame):
         # Label(app,text="First").grid(row=0,sticky=E)#靠右
         self.start = time.time()
         now = round(time.time() - self.start, 0)
-        # canva = tk.Canvas(self, width=100, height=40, background=maze_graphics.BGC)
-        # canva.create_text(50,22,text = now)
-        # print(now)
-        # canva.grid()
 
-        # tk.Button(self, text='start', command=bbb.start)
-        # Button(window, text='start', command=ttt.start).pack(side=LEFT)
-
-        # self.quitButton = tk.Button(self, text='skip', command=self.quit)
-        # self.quitButton.grid()
         global label
         label = tk.Label(self, font=("Times New Roman", 22), fg='blue', text=now)
         label.grid()
-        # label1 = tk.Label(self, font=("微软雅黑", 22), fg='blue', text=now).pack(side='right')
-        # label1.grid()
-        # label = Label(self.master, text="Welcome!", fg="black", font="Verdana 30 bold")
-        # label.pack()
 
         field = tk.Canvas(self, width=yy, height=xx, background=maze_graphics.BGC)
         field.grid()
@@ -71,31 +58,20 @@ class Application(tk.Frame):
         self.textLabel = tk.Label(self, font=("Times New Roman", 11), fg='blue', text="         ２．Use direction '↑' '↓' '←' '→'　")
         self.textLabel.grid()
 
-        # self.textLabel = tk.Label(self, font=("微软雅黑", 11), fg='blue', text=time.time())
-        # self.textLabel.grid()
-
         # 功能按钮 Button，通过Frame开辟一个空间，再往里面打包（.pack）放进去 ，再设置 side='left'
         fm = Frame(height=30, width=180)
         Button(fm, text='', width=0, command=self.Start(label))
         fm1 = Frame(fm, height=30, width=60)
-        # fm2 = Frame(fm, height=30, width=60)
-        # fm3 = Frame(fm, height=30, width=60)
-        fm4 = Frame(fm, height=30, width=60)
+        fm2 = Frame(fm, height=30, width=60)
         fm.grid(row=2)
         fm1.pack(side='left')
-        # fm2.pack(side='left')
-        # fm3.pack(side='left')
-        fm4.pack(side='right')
+        fm2.pack(side='right')
 
         now = round(time.time() - self.start, 0)
         print(now)
 
         Button(fm1, text="View Answer", width=10, command=self.answer).pack(side='left')
-        # Button(fm2, text="time："+str(now), width=10).pack(side='left')
-        # Button(fm2, text='start', width=10, command=sw.start).pack(side=LEFT)
-
-        # Button(fm3, text="再来一次", width=10, command=self.playGame).pack(side='left')
-        Button(fm4, text="Exit", width=10, command=self.stopGame).pack(side='right')
+        Button(fm2, text="Exit", width=10, command=self.stopGame).pack(side='right')
         return field  # 返回整个界面上的内容，整个领域
 
     def addHandler(self, field):
@@ -103,7 +79,6 @@ class Application(tk.Frame):
         seq = '<Any-KeyPress>'
         field.bind_all(sequence=seq, func=self.handleKey, add=None)
         field.bind("<Button-1>", self.xFunc1)
-        # messagebox.showinfo("小提示！", "请在30秒内完成游戏！")
 
     def initGame(self):
         # 设置游戏初始化
@@ -124,7 +99,7 @@ class Application(tk.Frame):
         tx = 9 - int((370 - event.y) / 35)
         print(f"鼠标左键点击了一次坐标是:x={event.x}y={event.y}")
         print(f"鼠标左键点击了一次坐标是:x={tx} y={ty}")
-        # self.game.auto2(x, y, tx, ty)
+
         strs = self.game.location(tx, ty)
         if strs == "no":
             running = False
@@ -136,7 +111,6 @@ class Application(tk.Frame):
 
         running = True
         self.counter_label(label)
-        # start['state'] = 'disabled'
 
     def counter_label(self, label):
         def count():
